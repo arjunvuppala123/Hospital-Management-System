@@ -1,4 +1,6 @@
 import psycopg2
+import os
+import time
 
 def updateReceptionist(r_id, address):
     try:
@@ -627,14 +629,14 @@ def updateDoctor(dno, edu):
 
         cursor = connection.cursor()
 
-        sql_update_query = """Update records set d_education = %s where dno = %s"""
+        sql_update_query = """Update doctor set d_education = %s where d_no = %s"""
         cursor.execute(sql_update_query, (edu,dno))
         connection.commit()
         count = cursor.rowcount
         print(count, "Record Updated successfully ")
 
         print("Table After updating record ")
-        sql_select_query = """select * from records where dno = %s"""
+        sql_select_query = """select * from doctor where d_no = %s"""
         cursor.execute(sql_select_query, (dno,))
         record = cursor.fetchone()
         print(record)
@@ -1130,340 +1132,385 @@ def updateTreatment(tid, status):
             connection.close()
             print("PostgreSQL connection is closed")
 
-print("Hospital Management System")
-print("Which Department you want to access:")
-print("1. Doctor")
-print("2. Patient")
-print("3. Medicine")
-print("4. Nurse")
-print("5. Rooms")
-print("6. Treatment")
-print("7. Records")
-print("8. Receptionist")
-ch = int(input('Enter your choice:'))
-if ch==1:
-    print("Doctor Section!!")
-    print("Select what operation you want to do in the Doctors Section:")
-    print("1. Retrieve data")
-    print("2. Insert data")
-    print("3. Delete data")
-    print("4. Update data")
-    ch7 = int(input('Enter your choice:'))
-    if ch7 == 1:
-        print("Retrieve Section!")
-        print("\t1.Retrieve All Information Related to Doctor")
-        print("\t2.Retrieve Information by provididng d_no")
-        print("Enter choice(1 or 2):")
-        h=int(input())
-        if h==1:
-            Retrieve_All_Data_Doctor()
-        elif h==2:
-            print("Enter the d_no")
-            d_no=int(input())
-            Retrieve_record_by_did(d_no)
-        else:
-            print("wrong choice")
-
-		
-    elif ch7 == 2:
-        values = input("enter details: ")
-        data = values.split(",")
-        record = tuple(data)
-        print(record)
-        insert_record_Doctor(record)
-    elif ch7 == 3:
-        print("Delete Section!")
-        print("Enter the d_no to delete a record")
-        d_no=int(input())
-        deleteDoctor(d_no)
-    elif ch7 == 4:
-        d_id = int(input('enter id of doctor for updation:'))
-        edu = input('enter new education:')
-        updateReceptionist(d_id, edu)
-
-elif ch==2:
-    print("Patient Section!!")
-    print("Select what operation you want to do in the Patient's Section:")
-    print("1. Retrieve data")
-    print("2. Insert data")
-    print("3. Delete data")
-    print("4. Update data")
-    ch7 = int(input('Enter your choice:'))
-    if ch7 == 1:
-        print("Retrieve Section!")
-        print("\t1.Retrieve All Information Related to Patient")
-        print("\t2.Retrieve Information by provididng p_no")
-        print("Enter choice(1 or 2):")
-        h=int(input())
-        if h==1:
-            Retrieve_All_Data_Patient()
-        elif h==2:
-            print("Enter the p_no")
-            p_no=int(input())
-            Retrieve_All_Data_Patient_by_ID(p_no)
-        else:
-            print("wrong choice")
-    elif ch7 == 2:
-        print("Insert Section!")
-        values = input("Enter details(p_no,p_contactno,p_name,date_admitted,date_discharged): ")
-        data = values.split(",")
-        record = tuple(data)
-        print(record)
-        insert_record_Patient(record)
-    elif ch7 == 3:
-        p_no = int(input("Enter p_no to be deleted:"))
-        deletePatient(p_no)
-    elif ch7 == 4:
-        print("Update Section!")
-        p_no = int(input('Enter p_no of record for updation: ')) 
-        p_contactno = input('Enter new contactno:')
-        updatePatient(p_no, p_contactno)
-    else:
-        print("Wrong Choice")
-
-elif ch==3:
-    print("Medicine Section!!")
-    print("Select what operation you want to do in the Medicine Section:")
-    print("1. Retrieve data")
-    print("2. Insert data")
-    print("3. Delete data")
-    print("4. Update data")
-    ch7 = int(input('Enter your choice:'))
-    if ch7 == 1:
-        print("Retrieve Section!")
-        print("\t1.Retrieve All Information Related to Medicine")
-        print("\t2.Retrieve Information by provididng med_id")
-        print("Enter choice(1 or 2):")
-        h=int(input())
-        if h==1:
-            Retrieve_All_Data_Medicine()
-        elif h==2:
-            print("Enter the med_id")
-            med_id=int(input())
-            Retrieve_All_Data_Medicine_by_ID(med_id)
-        else:
-            print("wrong choice")
-    elif ch7 == 2:
-        print("Insert Section!")
-        values = input("Enter details(price,qty,d_number,med_id,med_description): ")
-        data = values.split(",")
-        record = tuple(data)
-        print(record)
-        insert_record_Medicine(record)
-    elif ch7 == 3:
-        print("Delete Section!")
-        med_id = int(input("Enter med_id to be deleted:"))
-        deleteMedicine(med_id)
-    elif ch7 == 4:
-        print("Update Section!")
-        print("Enter the med_id ")
-        med_id=input()
-        price=input("Enter updated price:")
-        updateMedicine(med_id, price)
-    else:
-        print("Wrong Choice")
-elif ch==4:
-    print("Nurse Section!!")
-    print("Select what operation you want to do in the Nurse Section:")
-    print("1. Retrieve data")
-    print("2. Insert data")
-    print("3. Delete data")
-    print("4. Update data")
-    ch7 = int(input('Enter your choice:'))
-    if ch7 == 1:
-        print("\t1.Retrieve All Information Related to Nurse")
-        print("\t2.Retrieve Information by provididng Nurse_id")
-        print("Enter choice(1 or 2):")
-        h=int(input())
-        if h==1:
-            Retrieve_All_Data()
-        elif h==2:
-            print("Enter the nurseid:")
-            nurseid_=int(input())
-            Retrieve_record_by_id(nurseid_)
-        else:
-            print()
-
-    elif ch7 == 2:
-        print("Insert Section!")
-        print("Enter the details nurse_id,nurse_name,nurse_exp,room_id")
-        values = input("enter details: ")
-        data = values.split(",")
-        record = tuple(data)
-        print(record)
-        insert_record(record)
-		
-    elif ch7 == 3:
-        print("Delete Section!")
-        print("Enter the nurseid to delete a record")
-        nurseid=int(input())
-        deleteNurse(nurseid)
-		
-    elif ch7 == 4:
-        print("Update Section!")
-        print("Enter the nurseid ")
-        nurseid=int(input())
-        room_id = input("enter room id:")
-        updateNurse(nurseid,room_id)
-		
-    else:
-        print("Wrong Choice")
-	
-elif ch==5:
-    print("Rooms Section!!")
-    print("Select what operation you want to do in the Rooms Section:")
-    print("1. Retrieve data")
-    print("2. Insert data")
-    print("3. Delete data")
-    print("4. Update data")
-    ch7 = int(input('Enter your choice:'))
-    if ch7 == 1:
-        print("Retrieve Section!")
-        print("\t1.Retrieve All Information Related to Rooms")
-        print("\t2.Retrieve Information by provididng Room_id")
-        print("Enter choice(1 or 2):")
-        h=int(input())
-        if h == 1:
-            Retrieve_All_Data_ofRoom()
-            print(1)
-        elif h==2:
-            print("Enter the roomid:")
-            roomid_=int(input())
-            Retrieve_record_by_id_forroom(roomid_)
-        else:
-            print("wrong choice")
-    		 
-		
-    elif ch7 == 2:
-        print("Enter the details")
-        values = input("enter details: ")
-        data = values.split(",")
-        record = tuple(data)
-        print(record)
-        insert_record_room(record)
-		
-    elif ch7 == 3:
-        print("Enter the roomid to delete a record")
-        roomid=int(input())
-        deleteRoom(roomid)
-    elif ch7 == 4:
-        print("Enter the roomid ")
-        roomid=input()
-        pid = input("enter patient id:")
-        updateRoom(roomid,pid)
-    else:
-        print("Wrong Choice")
-elif ch==6:
-    print("Treatment Section!!")
-    print("Select what operation you want to do in the Medicine Section:")
-    print("1. Retrieve data")
-    print("2. Insert data")
-    print("3. Delete data")
-    print("4. Update data")
-    ch7 = int(input('Enter your choice:'))
-    if ch7 == 1:
-        print("Retrieve Section!")
-        print("\t1.Retrieve All Information Related to Treatment")
-        print("\t2.Retrieve Information by provididng t_id")
-        print("Enter choice(1 or 2):")
-        h=int(input())
-        if h==1:
-            Retrieve_All_Data_Treatment()
-        elif h==2:
-            print("Enter the t_id")
-            t_id=int(input())
-            Retrieve_All_Data_Treatment_by_ID(t_id)
-        else:
-            print("wrong choice")
-    elif ch7 == 2:
-        values = input("Enter details(t_id,p_id,is_treated): ")
-        data = values.split(",")
-        record = tuple(data)
-        print(record)
-        insert_record_Treatment(record)
-    elif ch7 == 3:
-        print("Delete Section!")
-        t_id = int(input("Enter t_id to be deleted:"))
-        deleteTreatment(t_id)
-    elif ch7 == 4:
-        print("Update Section!")
-        print("Enter the t_id ")
-        t_id = input()
-        is_treated=input("Enter updated status:")
-        updateTreatment(t_id, is_treated)
-    else:
-        print("Wrong Choice")
-elif ch==7:
-    print("Select what operation you want to do in the Records Section:")
-    print("1. Retrieve data")
-    print("2. Insert data")
-    print("3. Delete data")
-    print("4. Update data")
-    choice = int(input('Enter your choice:'))
-    if choice == 1:
-        if choice == 1:
-            print("\t1.Retrieve All Information Related to Records")
-            print("\t2.Retrieve Information by provididng Records_id")
-            print("Enter choice(1 or 2):")
-            h=int(input())
-            if h == 1:
-                Retrieve_All_Data_Records()
-            elif h==2:
-                print("Enter the roomid:")
-                rec_id=int(input())
-                Retrieve_Data_By_Record_Id(rec_id)
-            else:
-                print("wrong choice")
-    elif choice == 2:
-        values = input("enter details: ")
-        data = values.split(",")
-        record = tuple(data)
-        insert_record_Record(record)
-
-    elif choice == 3:
-        id1 = int(input("Enter id to be deleted:"))
-        deleteDataRecord(id1)
-    elif choice == 4:
-        r_id = int(input('enter id of record for updation = '))
-        desc = input('enter new description =')
-        updateRecord(r_id, desc)
-    else:
-        print("Wrong Choice")
-elif ch==8:
-    print("Select what operation you want to do in the Receptionist Section:")
-    print("1. Retrieve data")
-    print("2. Insert data")
-    print("3. Delete data")
-    print("4. Update data")
-    choice = int(input('Enter your choice:'))
-    if choice == 1:
-        if choice == 1:
+ch = 0
+while(ch!=9):
+    os.system("cls")
+    print("Hospital Management System")
+    print("Which Department you want to access:")
+    print("1. Doctor")
+    print("2. Patient")
+    print("3. Medicine")
+    print("4. Nurse")
+    print("5. Rooms")
+    print("6. Treatment")
+    print("7. Records")
+    print("8. Receptionist")
+    print("9. Exit the program")
+    ch = int(input('Enter your choice:'))
+    if ch==1:
+        print("Doctor Section!!")
+        print("Select what operation you want to do in the Doctors Section:")
+        print("1. Retrieve data")
+        print("2. Insert data")
+        print("3. Delete data")
+        print("4. Update data")
+        ch7 = int(input('Enter your choice:'))
+        if ch7 == 1:
             print("Retrieve Section!")
-            print("\t1.Retrieve All Information Related to Receptionist")
-            print("\t2.Retrieve Information by provididng Receptionist_id")
+            print("\t1.Retrieve All Information Related to Doctor")
+            print("\t2.Retrieve Information by provididng d_no")
+            print("Enter choice(1 or 2):")
+            h=int(input())
+            if h==1:
+                Retrieve_All_Data_Doctor()
+                time.sleep(20)
+            elif h==2:
+                print("Enter the d_no")
+                d_no=int(input())
+                Retrieve_record_by_did(d_no)
+                time.sleep(5)
+            else:
+                print("wrong choice")
+                time.sleep(5)
+        elif ch7 == 2:
+            values = input("enter details: ")
+            data = values.split(",")
+            record = tuple(data)
+            print(record)
+            insert_record_Doctor(record)
+            time.sleep(5)
+        elif ch7 == 3:
+            print("Delete Section!")
+            print("Enter the d_no to delete a record")
+            d_no=int(input())
+            deleteDoctor(d_no)
+            time.sleep(5)
+        elif ch7 == 4:
+            d_id = int(input('enter id of doctor for updation:'))
+            edu = input('enter new education:')
+            updateDoctor(d_id, edu)
+            time.sleep(5)
+    elif ch==2:
+        print("Patient Section!!")
+        print("Select what operation you want to do in the Patient's Section:")
+        print("1. Retrieve data")
+        print("2. Insert data")
+        print("3. Delete data")
+        print("4. Update data")
+        ch7 = int(input('Enter your choice:'))
+        if ch7 == 1:
+            print("Retrieve Section!")
+            print("\t1.Retrieve All Information Related to Patient")
+            print("\t2.Retrieve Information by provididng p_no")
+            print("Enter choice(1 or 2):")
+            h=int(input())
+            if h==1:
+                Retrieve_All_Data_Patient()
+                time.sleep(20)
+            elif h==2:
+                print("Enter the p_no")
+                p_no=int(input())
+                Retrieve_All_Data_Patient_by_ID(p_no)
+                time.sleep(5)
+            else:
+                print("wrong choice")
+                time.sleep(5)
+        elif ch7 == 2:
+            print("Insert Section!")
+            values = input("Enter details(p_no,p_contactno,p_name,date_admitted,date_discharged): ")
+            data = values.split(",")
+            record = tuple(data)
+            print(record)
+            insert_record_Patient(record)
+            time.sleep(5)
+        elif ch7 == 3:
+            p_no = int(input("Enter p_no to be deleted:"))
+            deletePatient(p_no)
+            time.sleep(5)
+        elif ch7 == 4:
+            print("Update Section!")
+            p_no = int(input('Enter p_no of record for updation: ')) 
+            p_contactno = input('Enter new contactno:')
+            updatePatient(p_no, p_contactno)
+            time.sleep(5)
+        else:
+            print("Wrong Choice")
+            time.sleep(5)
+    elif ch==3:
+        print("Medicine Section!!")
+        print("Select what operation you want to do in the Medicine Section:")
+        print("1. Retrieve data")
+        print("2. Insert data")
+        print("3. Delete data")
+        print("4. Update data")
+        ch7 = int(input('Enter your choice:'))
+        if ch7 == 1:
+            print("Retrieve Section!")
+            print("\t1.Retrieve All Information Related to Medicine")
+            print("\t2.Retrieve Information by provididng med_id")
+            print("Enter choice(1 or 2):")
+            h=int(input())
+            if h==1:
+                Retrieve_All_Data_Medicine()
+                time.sleep(15)
+            elif h==2:
+                print("Enter the med_id")
+                med_id=int(input())
+                Retrieve_All_Data_Medicine_by_ID(med_id)
+                time.sleep(5)
+            else:
+                print("wrong choice")
+                time.sleep(5)
+        elif ch7 == 2:
+            print("Insert Section!")
+            values = input("Enter details(price,qty,d_number,med_id,med_description): ")
+            data = values.split(",")
+            record = tuple(data)
+            print(record)
+            insert_record_Medicine(record)
+            time.sleep(5)
+        elif ch7 == 3:
+            print("Delete Section!")
+            med_id = int(input("Enter med_id to be deleted:"))
+            deleteMedicine(med_id)
+            time.sleep(5)
+        elif ch7 == 4:
+            print("Update Section!")
+            print("Enter the med_id ")
+            med_id=input()
+            price=input("Enter updated price:")
+            updateMedicine(med_id, price)
+            time.sleep(5)
+        else:
+            print("Wrong Choice")
+            time.sleep(5)
+    elif ch==4:
+        print("Nurse Section!!")
+        print("Select what operation you want to do in the Nurse Section:")
+        print("1. Retrieve data")
+        print("2. Insert data")
+        print("3. Delete data")
+        print("4. Update data")
+        ch7 = int(input('Enter your choice:'))
+        if ch7 == 1:
+            print("\t1.Retrieve All Information Related to Nurse")
+            print("\t2.Retrieve Information by provididng Nurse_id")
+            print("Enter choice(1 or 2):")
+            h=int(input())
+            if h==1:
+                Retrieve_All_Data()
+                time.sleep(15)
+            elif h==2:
+                print("Enter the nurseid:")
+                nurseid_=int(input())
+                Retrieve_record_by_id(nurseid_)
+                time.sleep(5)
+            else:
+                print("wrong choice")
+                time.sleep(5)
+        elif ch7 == 2:
+            print("Insert Section!")
+            print("Enter the details nurse_id,nurse_name,nurse_exp,room_id")
+            values = input("enter details: ")
+            data = values.split(",")
+            record = tuple(data)
+            print(record)
+            insert_record(record)
+            time.sleep(5)
+        elif ch7 == 3:
+            print("Delete Section!")
+            print("Enter the nurseid to delete a record")
+            nurseid=int(input())
+            deleteNurse(nurseid)
+            time.sleep(5)
+        elif ch7 == 4:
+            print("Update Section!")
+            print("Enter the nurseid ")
+            nurseid=int(input())
+            room_id = input("enter room id:")
+            updateNurse(nurseid,room_id)
+            time.sleep(5)
+        else:
+            print("Wrong Choice")
+            time.sleep(5)
+    elif ch==5:
+        print("Rooms Section!!")
+        print("Select what operation you want to do in the Rooms Section:")
+        print("1. Retrieve data")
+        print("2. Insert data")
+        print("3. Delete data")
+        print("4. Update data")
+        ch7 = int(input('Enter your choice:'))
+        if ch7 == 1:
+            print("Retrieve Section!")
+            print("\t1.Retrieve All Information Related to Rooms")
+            print("\t2.Retrieve Information by provididng Room_id")
             print("Enter choice(1 or 2):")
             h=int(input())
             if h == 1:
-                Retrieve_All_Data_Receptionist()
+                Retrieve_All_Data_ofRoom()
+                time.sleep(15)
             elif h==2:
                 print("Enter the roomid:")
-                rec_id=int(input())
-                Retrieve_Data_By_Receptionist_Id(rec_id)
+                roomid_=int(input())
+                Retrieve_record_by_id_forroom(roomid_)
+                time.sleep(5)
             else:
                 print("wrong choice")
-    elif choice == 2:
-        values = input("enter details: ")
-        data = values.split(",")
-        record = tuple(data)
-        insert_record_Receptionist(record)
-    elif choice == 3:
-        id1 = int(input("Enter id to be deleted:"))
-        deleteReceptionist(id1)
-    elif choice == 4:
-        r_id = int(input('enter id of receptionist for updation:'))
-        addr = input('enter new address:')
-        updateReceptionist(r_id, addr)
-    else:
-        print("Wrong Choice")
-else:
-    print("wrong choice")
+                time.sleep(5)	
+        elif ch7 == 2:
+            print("Enter the details")
+            values = input("enter details: ")
+            data = values.split(",")
+            record = tuple(data)
+            print(record)
+            insert_record_room(record)
+            time.sleep(5)
+        elif ch7 == 3:
+            print("Enter the roomid to delete a record")
+            roomid=int(input())
+            deleteRoom(roomid)
+            time.sleep(5)
+        elif ch7 == 4:
+            print("Enter the roomid ")
+            roomid=input()
+            pid = input("enter patient id:")
+            updateRoom(roomid,pid)
+            time.sleep(5)
+        else:
+            print("Wrong Choice")
+            time.sleep(5)
+    elif ch==6:
+        print("Treatment Section!!")
+        print("Select what operation you want to do in the Medicine Section:")
+        print("1. Retrieve data")
+        print("2. Insert data")
+        print("3. Delete data")
+        print("4. Update data")
+        ch7 = int(input('Enter your choice:'))
+        if ch7 == 1:
+            print("Retrieve Section!")
+            print("\t1.Retrieve All Information Related to Treatment")
+            print("\t2.Retrieve Information by provididng t_id")
+            print("Enter choice(1 or 2):")
+            h=int(input())
+            if h==1:
+                Retrieve_All_Data_Treatment()
+                time.sleep(15)
+            elif h==2:
+                print("Enter the t_id")
+                t_id=int(input())
+                Retrieve_All_Data_Treatment_by_ID(t_id)
+                time.sleep(5)
+            else:
+                print("wrong choice")
+                time.sleep(5)
+        elif ch7 == 2:
+            values = input("Enter details(t_id,p_id,is_treated): ")
+            data = values.split(",")
+            record = tuple(data)
+            print(record)
+            insert_record_Treatment(record)
+            time.sleep(5)
+        elif ch7 == 3:
+            print("Delete Section!")
+            t_id = int(input("Enter t_id to be deleted:"))
+            deleteTreatment(t_id)
+            time.sleep(5)
+        elif ch7 == 4:
+            print("Update Section!")
+            print("Enter the t_id ")
+            t_id = input()
+            is_treated=input("Enter updated status:")
+            updateTreatment(t_id, is_treated)
+            time.sleep(5)
+        else:
+            print("Wrong Choice")
+            time.sleep(5)
+    elif ch==7:
+        print("Select what operation you want to do in the Records Section:")
+        print("1. Retrieve data")
+        print("2. Insert data")
+        print("3. Delete data")
+        print("4. Update data")
+        choice = int(input('Enter your choice:'))
+        if choice == 1:
+            if choice == 1:
+                print("\t1.Retrieve All Information Related to Records")
+                print("\t2.Retrieve Information by provididng Records_id")
+                print("Enter choice(1 or 2):")
+                h=int(input())
+                if h == 1:
+                    Retrieve_All_Data_Records()
+                    time.sleep(15)
+                elif h==2:
+                    print("Enter the roomid:")
+                    rec_id=int(input())
+                    Retrieve_Data_By_Record_Id(rec_id)
+                    time.sleep(5)
+                else:
+                    print("wrong choice")
+                    time.sleep(5)
+        elif choice == 2:
+            values = input("enter details: ")
+            data = values.split(",")
+            record = tuple(data)
+            insert_record_Record(record)
+            time.sleep(5)
+        elif choice == 3:
+            id1 = int(input("Enter id to be deleted:"))
+            deleteDataRecord(id1)
+            time.sleep(5)
+        elif choice == 4:
+            r_id = int(input('enter id of record for updation = '))
+            desc = input('enter new description =')
+            updateRecord(r_id, desc)
+            time.sleep(5)
+        else:
+            print("Wrong Choice")
+            time.sleep(5)
+    elif ch==8:
+        print("Select what operation you want to do in the Receptionist Section:")
+        print("1. Retrieve data")
+        print("2. Insert data")
+        print("3. Delete data")
+        print("4. Update data")
+        choice = int(input('Enter your choice:'))
+        if choice == 1:
+                print("Retrieve Section!")
+                print("\t1.Retrieve All Information Related to Receptionist")
+                print("\t2.Retrieve Information by provididng Receptionist_id")
+                print("Enter choice(1 or 2):")
+                h=int(input())
+                if h == 1:
+                    Retrieve_All_Data_Receptionist()
+                    time.sleep(15)
+                elif h==2:
+                    print("Enter the roomid:")
+                    rec_id=int(input())
+                    Retrieve_Data_By_Receptionist_Id(rec_id)
+                    time.sleep(5)
+                else:
+                    print("wrong choice")
+                    time.sleep(5)
+        elif choice == 2:
+            values = input("enter details: ")
+            data = values.split(",")
+            record = tuple(data)
+            insert_record_Receptionist(record)
+            time.sleep(5)
+        elif choice == 3:
+            id1 = int(input("Enter id to be deleted:"))
+            deleteReceptionist(id1)
+            time.sleep(5)
+        elif choice == 4:
+            r_id = int(input('enter id of receptionist for updation:'))
+            addr = input('enter new address:')
+            updateReceptionist(r_id, addr)
+            time.sleep(5)
+        else:
+            print("Wrong Choice")
+            time.sleep(5)
+    elif ch==9:
+        print("thank you for using our system")
+
