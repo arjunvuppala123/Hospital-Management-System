@@ -5,7 +5,7 @@ import time
 def updateReceptionist(r_id, address):
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -37,7 +37,7 @@ def updateReceptionist(r_id, address):
 def deleteReceptionist(re_id):
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -62,7 +62,7 @@ def deleteReceptionist(re_id):
 def updateRecord(rec_id, desc):
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -94,7 +94,7 @@ def updateRecord(rec_id, desc):
 def deleteDataRecord(rec_id):
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -119,7 +119,7 @@ def deleteDataRecord(rec_id):
 def Retrieve_All_Data_Receptionist():
     try:
         connection = psycopg2.connect(user="postgres",
-                                       password="4219@Pad",
+                                      password=" ",
                                       host="127.0.0.1",
                                       port="5432",
                                       database="hospital")
@@ -148,7 +148,7 @@ def Retrieve_All_Data_Receptionist():
 def Retrieve_Data_By_Receptionist_Id(ID):
     try:
         connection = psycopg2.connect(user="postgres",
-                                       password="4219@Pad",
+                                      password=" ",
                                       host="127.0.0.1",
                                       port="5432",
                                       database="hospital")
@@ -177,7 +177,7 @@ def Retrieve_Data_By_Receptionist_Id(ID):
 def Retrieve_All_Data():
     try:
         connection = psycopg2.connect(user="postgres",
-                                       password="4219@Pad",
+                                      password=" ",
                                       host="127.0.0.1",
                                       port="5432",
                                       database="hospital")
@@ -207,7 +207,7 @@ def Retrieve_All_Data():
 def Retrieve_record_by_id(nurseid_):
     try:
         connection = psycopg2.connect(user="postgres",
-                                       password="4219@Pad",
+                                      password=" ",
                                       host="127.0.0.1",
                                       port="5432",
                                       database="hospital")
@@ -236,7 +236,7 @@ def Retrieve_record_by_id(nurseid_):
 def Retrieve_All_Data_ofRoom():
     try:
         connection = psycopg2.connect(user="postgres",
-                                       password="4219@Pad",
+                                      password=" ",
                                       host="127.0.0.1",
                                       port="5432",
                                       database="hospital")
@@ -265,7 +265,7 @@ def Retrieve_All_Data_ofRoom():
 def Retrieve_record_by_id_forroom(roomid_):
     try:
         connection = psycopg2.connect(user="postgres",
-                                       password="4219@Pad",
+                                      password=" ",
                                       host="127.0.0.1",
                                       port="5432",
                                       database="hospital")
@@ -294,7 +294,7 @@ def Retrieve_record_by_id_forroom(roomid_):
 def insert_record_room(record):
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -320,7 +320,7 @@ def insert_record_room(record):
 def deleteRoom(roomid):
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -345,7 +345,7 @@ def deleteRoom(roomid):
 def insert_record(record):
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -371,7 +371,7 @@ def insert_record(record):
 def deleteNurse(nurseid):
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -396,7 +396,7 @@ def deleteNurse(nurseid):
 def insert_record_Receptionist(record):
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -422,7 +422,7 @@ def insert_record_Receptionist(record):
 def Retrieve_All_Data_Records():
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -451,7 +451,7 @@ def Retrieve_All_Data_Records():
 def Retrieve_Data_By_Record_Id(Rec_Id):
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -481,7 +481,7 @@ def Retrieve_Data_By_Record_Id(Rec_Id):
 def Retrieve_All_Data_Doctor():
     try:
         connection = psycopg2.connect(user="postgres",
-                                       password="4219@Pad",
+                                      password=" ",
                                       host="127.0.0.1",
                                       port="5432",
                                       database="hospital")
@@ -512,7 +512,7 @@ def Retrieve_All_Data_Doctor():
 def Retrieve_record_by_did(d_id):
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -545,7 +545,7 @@ def Retrieve_record_by_did(d_id):
 def insert_record_Record(record):
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -572,7 +572,7 @@ def insert_record_Record(record):
 def insert_record_Doctor(record):
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -597,7 +597,7 @@ def insert_record_Doctor(record):
 def deleteDoctor(d_id):
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -622,7 +622,7 @@ def deleteDoctor(d_id):
 def updateDoctor(dno, edu):
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -654,7 +654,7 @@ def updateDoctor(dno, edu):
 def updateRoom(room_id,pid):
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -685,7 +685,7 @@ def updateRoom(room_id,pid):
 def updateNurse(nurse_id,room_id):
     try:
         connection = psycopg2.connect(user="postgres",
-                                   password="4219@Pad",
+                                  password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -716,7 +716,7 @@ def updateNurse(nurse_id,room_id):
 def Retrieve_All_Data_Patient():
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="4219@Pad",
+                                     password=" ",
                                       host="127.0.0.1",
                                       port="5432",
                                       database="hospital")
@@ -746,7 +746,7 @@ def Retrieve_All_Data_Patient():
 def Retrieve_All_Data_Medicine():
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="4219@Pad",
+                                     password=" ",
                                       host="127.0.0.1",
                                       port="5432",
                                       database="hospital")
@@ -776,7 +776,7 @@ def Retrieve_All_Data_Medicine():
 def Retrieve_All_Data_Treatment():
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="4219@Pad",
+                                     password=" ",
                                       host="127.0.0.1",
                                       port="5432",
                                       database="hospital")
@@ -804,7 +804,7 @@ def Retrieve_All_Data_Treatment():
 def Retrieve_All_Data_Patient_by_ID(p_id):
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="4219@Pad",
+                                     password=" ",
                                       host="127.0.0.1",
                                       port="5432",
                                       database="hospital")
@@ -834,7 +834,7 @@ def Retrieve_All_Data_Patient_by_ID(p_id):
 def Retrieve_All_Data_Medicine_by_ID(med_id):
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="4219@Pad",
+                                     password=" ",
                                       host="127.0.0.1",
                                       port="5432",
                                       database="hospital")
@@ -864,7 +864,7 @@ def Retrieve_All_Data_Medicine_by_ID(med_id):
 def Retrieve_All_Data_Treatment_by_ID(t_id):
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="4219@Pad",
+                                     password=" ",
                                       host="127.0.0.1",
                                       port="5432",
                                       database="hospital")
@@ -892,7 +892,7 @@ def Retrieve_All_Data_Treatment_by_ID(t_id):
 def insert_record_Patient(record):
     try:
         connection = psycopg2.connect(user="postgres",
-                                  password="4219@Pad",
+                                 password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -917,7 +917,7 @@ def insert_record_Patient(record):
 def insert_record_Medicine(record):
     try:
         connection = psycopg2.connect(user="postgres",
-                                  password="4219@Pad",
+                                 password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -942,7 +942,7 @@ def insert_record_Medicine(record):
 def insert_record_Treatment(record):
     try:
         connection = psycopg2.connect(user="postgres",
-                                  password="4219@Pad",
+                                 password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -967,7 +967,7 @@ def insert_record_Treatment(record):
 def deletePatient(p_id):
     try:
         connection = psycopg2.connect(user="postgres",
-                                  password="4219@Pad",
+                                 password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -992,7 +992,7 @@ def deletePatient(p_id):
 def deleteMedicine(med_id):
     try:
         connection = psycopg2.connect(user="postgres",
-                                  password="4219@Pad",
+                                 password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -1017,7 +1017,7 @@ def deleteMedicine(med_id):
 def deleteTreatment(t_id):
     try:
         connection = psycopg2.connect(user="postgres",
-                                  password="4219@Pad",
+                                 password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -1042,7 +1042,7 @@ def deleteTreatment(t_id):
 def updatePatient(pno, contactno):
     try:
         connection = psycopg2.connect(user="postgres",
-                                  password="4219@Pad",
+                                 password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -1073,7 +1073,7 @@ def updatePatient(pno, contactno):
 def updateMedicine(m_id, price):
     try:
         connection = psycopg2.connect(user="postgres",
-                                  password="4219@Pad",
+                                 password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
@@ -1104,7 +1104,7 @@ def updateMedicine(m_id, price):
 def updateTreatment(tid, status):
     try:
         connection = psycopg2.connect(user="postgres",
-                                  password="4219@Pad",
+                                 password=" ",
                                   host="127.0.0.1",
                                   port="5432",
                                   database="hospital")
